@@ -1,0 +1,629 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --color-barra-lateral: #ffffff;
+
+    --color-texto: #000000;
+    --color-texto-menu: #868890;
+
+    --color-menu-hover: #eeeeee;
+    --color-menu-hover-texto: #000000;
+
+    --color-boton: #000000;
+    --color-boton-texto: #ffffff;
+
+    --color-linea: #b4b4b4;
+
+    --color-switch-base: #c9cace;
+    --color-switch-circulo: #f1f1f1;
+
+    --color-scroll: #c0c0c0;
+    --color-scroll-hover: #868686;
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+html::-webkit-scrollbar {
+    width: 0.8rem;
+}
+
+html::-webkit-scrollbar-track {
+    background: var(--color-barra-lateral);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: .8rem;
+}
+
+body {
+    max-height: 100vh;
+    background-color: #d1d1d1;
+}
+
+.dark-mode {
+    --color-barra-lateral: #2c2d31;
+
+    --color-texto: #ffffff;
+    --color-texto-menu: #6e6e75;
+
+    --color-menu-hover: #000000;
+    --color-menu-hover-texto: #eeeeee;
+
+    --color-boton: #ffffff;
+    --color-boton-texto: #000000;
+
+    --color-linea: #5a5a5a;
+
+    --color-switch-base: #27cd40;
+    --color-switch-circulo: #ffffff;
+
+    --color-scroll: #44454a;
+    --color-scroll-hover: #555555;
+
+    background-color: #646464;
+}
+
+/*-----------------Menu*/
+.menu {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+    right: 15px;
+    top: 15px;
+    z-index: 100;
+}
+
+/*----------------Barra Lateral*/
+.barra-lateral {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 250px;
+    height: 100%;
+    overflow: hidden;
+    padding: 20px 15px;
+    background-color: var(--color-barra-lateral);
+    transition: width 0.5s ease, background-color 0.3s ease, left 0.5s ease;
+    z-index: 50;
+}
+
+.mini-barra-lateral {
+    width: 80px;
+}
+
+.barra-lateral span {
+    width: 100px;
+    white-space: nowrap;
+    font-size: 18px;
+    text-align: left;
+    opacity: 1;
+    transition: opacity 0.5s ease, width 0.5s ease;
+}
+
+.barra-lateral span.oculto {
+    opacity: 0;
+    width: 0;
+}
+
+/*------------> Nombre de la página */
+.barra-lateral .nombre-pagina {
+    width: 100%;
+    height: 45px;
+    color: var(--color-texto);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.barra-lateral .nombre-pagina ion-icon {
+    min-width: 50px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.barra-lateral .nombre-pagina span {
+    margin-left: 5px;
+    font-size: 25px;
+}
+
+/*------------> Botón*/
+.barra-lateral .boton {
+    width: 100%;
+    height: 45px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+    cursor: pointer;
+}
+
+.barra-lateral .boton ion-icon {
+    min-width: 50px;
+    font-size: 25px;
+}
+
+/*--------------> Menu Navegación*/
+.barra-lateral .navegacion {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.barra-lateral .navegacion::-webkit-scrollbar {
+    width: 5px;
+}
+
+.barra-lateral .navegacion::-webkit-scrollbar-thumb {
+    background-color: var(--color-scroll);
+    border-radius: 5px;
+}
+
+.barra-lateral .navegacion::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-scroll-hover);
+}
+
+.barra-lateral .navegacion li {
+    list-style: none;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.barra-lateral .navegacion a {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;
+    color: var(--color-texto-menu);
+}
+
+.barra-lateral .navegacion a:hover {
+    background-color: var(--color-menu-hover);
+    color: var(--color-menu-hover-texto);
+}
+
+.barra-lateral .navegacion ion-icon {
+    min-width: 50px;
+    font-size: 20px;
+}
+
+/*-----------------> Linea*/
+.barra-lateral .linea {
+    width: 100%;
+    height: 1px;
+    margin-top: 15px;
+    background-color: var(--color-linea);
+}
+
+/*----------------> Modo Oscuro*/
+.barra-lateral .modo-oscuro {
+    width: 100%;
+    margin-bottom: 80px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.barra-lateral .modo-oscuro .info {
+    width: 150px;
+    height: 45px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    color: var(--color-texto-menu);
+}
+
+.barra-lateral .modo-oscuro ion-icon {
+
+    width: 50px;
+    font-size: 20px;
+}
+
+/*--->switch*/
+.barra-lateral .modo-oscuro .switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.barra-lateral .modo-oscuro .base {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 35px;
+    height: 20px;
+    background-color: var(--color-switch-base);
+    border-radius: 50px;
+}
+
+.barra-lateral .modo-oscuro .circulo {
+    position: absolute;
+    width: 18px;
+    height: 90%;
+    background-color: var(--color-switch-circulo);
+    border-radius: 50%;
+    left: 2px;
+    transition: left 0.5s ease;
+}
+
+.barra-lateral .modo-oscuro .circulo.prendido {
+    left: 15px;
+}
+
+/*---------------> Usuario*/
+.barra-lateral .usuario {
+    width: 100%;
+    display: flex;
+}
+
+.barra-lateral .usuario img {
+    width: 50px;
+    min-width: 50px;
+    border-radius: 10px;
+}
+
+.barra-lateral .usuario .info-usuario {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-texto);
+    overflow: hidden;
+}
+
+.barra-lateral .usuario .nombre-email {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+}
+
+.barra-lateral .usuario .nombre {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.barra-lateral .usuario .email {
+    font-size: 13px;
+}
+
+.barra-lateral .usuario ion-icon {
+    font-size: 20px;
+}
+
+/*-------------main*/
+.barra-lateral .navegacion .inbox {
+    background-color: var(--color-menu-hover);
+    color: var(--color-menu-hover-texto);
+}
+
+.main {
+    margin-left: 250px;
+    transition: margin-left 0.5s ease;
+}
+
+.main.min-main {
+    margin-left: 80px;
+}
+
+/*------------------> Responsive*/
+@media (max-height: 660px) {
+    .barra-lateral .nombre-pagina {
+        margin-bottom: 5px;
+    }
+
+    .barra-lateral .modo-oscuro {
+        margin-bottom: 3px;
+    }
+}
+
+@media (max-width: 600px) {
+    .barra-lateral {
+        position: fixed;
+        left: -250px;
+    }
+
+    .max-barra-lateral {
+        left: 0;
+    }
+
+    .menu {
+        display: flex;
+    }
+
+    .menu ion-icon:nth-child(2) {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .main.min-main {
+        margin-left: 0;
+    }
+}
+
+/* ----------------- Tabla */
+
+.container-table {
+    height: 100vh;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.container-table::-webkit-scrollbar {
+    width: 0.8rem;
+}
+
+.container-table::-webkit-scrollbar-track {
+    background: var(--color-barra-lateral);
+}
+
+.container-table::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: .8rem;
+}
+
+.dark-mode .container-table::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-radius: .8rem;
+}
+
+.table {
+    border-collapse: collapse;
+    margin: 10px auto auto auto;
+    font-size: 11px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+
+.table thead {
+    background-color: #009879;
+    color: #ffffff;
+}
+
+.dark-mode .table thead {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.table thead th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.table thead th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+}
+
+.dark-mode .table th,
+.dark-mode .table td {
+    color: #fff;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.dark-mode .table tbody tr {
+    border-bottom: 1px solid #555555;
+}
+
+.table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.dark-mode .table tbody tr:nth-of-type(even) {
+    background-color: #2c2c2c;
+}
+
+.table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.dark-mode .table tbody tr:last-of-type {
+    border-bottom: 2px solid #333333;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.dark-mode .table tbody tr:hover {
+    background-color: #444444;
+}
+
+.table th {
+    position: sticky;
+    top: 0;
+}
+
+.toggle-button {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-color: #009879;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.dark-mode .toggle-button {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.rr {
+    padding: 1rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 350px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: .8rem;
+
+}
+
+/* ------------------------ */
+.input-container {
+    position: relative;
+}
+
+.input {
+    font-size: 1em;
+    padding: 0.6em 1em;
+    border: none;
+    border-radius: 6px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    max-width: 200px;
+    color: #333;
+}
+
+.input:hover {
+    background-color: #f2f2f2;
+}
+
+.input:focus {
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input::placeholder {
+    color: #999;
+}
+
+.highlight {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #6c63ff;
+    transition: width 0.3s ease;
+}
+
+.input:focus+.highlight {
+    width: 100%;
+}
+
+/* Optional: Animation on focus */
+@keyframes input-focus {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+    }
+
+    to {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.input:focus {
+    animation: input-focus 0.3s ease;
+}
+
+.container-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.boton {
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+    cursor: pointer;
+}
+
+.Btn {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    background: #009879;
+    background-size: 250%;
+    background-position: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition-duration: .5s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.11);
+    color: #fff;
+    font-size: 2rem;
+}
+
+.dark-mode .Btn {
+    background: #333333;
+}
+
+.container-filtro {
+    display: flex;
+    gap: 1rem;
+
+}
+
+audio {
+    filter: drop-shadow(0 0 2px #000);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
