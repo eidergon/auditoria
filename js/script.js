@@ -43,11 +43,13 @@ cloud.on("click", function () {
 
 a.on("click", function (e) {
     e.preventDefault();
+
     a.removeClass("inbox");
     $(this).addClass("inbox");
+    var page = $(this).data('page');
 
     $.ajax({
-        url: "tabla.php",
+        url: page + '.php',
         type: "GET",
         success: function (response) {
             $("#main").html(response);
@@ -96,10 +98,10 @@ $(document).on('click', '#buscar', function () {
                     text: "Coloca un Documento de Identidad."
                 });
             } else {
-                $('#nombre').val(data.nombre);
-                $('#supervisor').val(data.Jefe_inmediato);
-                $('#sede').val(data.ciudad);
-                $('#campaña').val(data.campaña);
+                $('#nombre').val(data.nombre).prop('readonly', true);
+                $('#supervisor').val(data.Jefe_inmediato).prop('readonly', true);
+                $('#sede').val(data.ciudad).prop('readonly', true);
+                $('#campaña').val(data.campaña).prop('readonly', true);
             }
         },
         error: function (error) {
@@ -110,11 +112,24 @@ $(document).on('click', '#buscar', function () {
 
 $(document).on('click', '#limpiar', function () {
     $("#enviar")[0].reset();
+    $('#motivo_mala_prectica, #motivo_validacion_id').hide();
+    $('#nombre').prop('readonly', false);
+    $('#supervisor').prop('readonly', false);
+    $('#sede').prop('readonly', false);
 });
 
 $(document).on('submit', '#enviar', function (e) {
     e.preventDefault();
+    var seleccionados = $('#motivo_mala_prectica input[type="checkbox"]:checked').map(function () {
+        return this.value;
+    }).get();
 
+    var seleccionados2 = $('#motivo_validacion_id input[type="checkbox"]:checked').map(function () {
+        return this.value;
+    }).get();
+
+    $('#motivosSeleccionados').val(seleccionados.join(', '))
+    $('#motivosSeleccionados2').val(seleccionados2.join(', '))
     var formData = new FormData(this);
 
     $.ajax({
@@ -132,6 +147,10 @@ $(document).on('submit', '#enviar', function (e) {
                     text: response.message,
                 });
                 $("#enviar")[0].reset();
+                $('#motivo_mala_prectica, #motivo_validacion_id').hide();
+                $('#nombre').prop('readonly', false);
+                $('#supervisor').prop('readonly', false);
+                $('#sede').prop('readonly', false);
             } else if (response.status === "error") {
                 Swal.fire({
                     icon: "error",
@@ -139,6 +158,10 @@ $(document).on('submit', '#enviar', function (e) {
                     text: response.message,
                 });
                 $("#enviar")[0].reset();
+                $('#motivo_mala_prectica, #motivo_validacion_id').hide();
+                $('#nombre').prop('readonly', false);
+                $('#supervisor').prop('readonly', false);
+                $('#sede').prop('readonly', false);
             }
         }
     })
@@ -148,7 +171,8 @@ $(document).on('click', '#filtro', function (e) {
     e.preventDefault();
 
     var fecha = $('#fecha_filtro').val();
-    var url = '../php/consulta_filtro.php?fecha=' + encodeURIComponent(fecha);
+    var fecha2 = $('#fecha_filtro2').val();
+    var url = '../php/consulta_filtro.php?fecha=' + encodeURIComponent(fecha) + '&fecha2=' + encodeURIComponent(fecha2);
 
     $.ajax({
         url: url,
@@ -164,18 +188,111 @@ $(document).on('click', '#filtro', function (e) {
 
 $(document).on('change', '#malas_preacticas', function () {
     var selectedValue = $(this).val();
-    if(selectedValue == 'No Cumple') {
-        $('#motivo_mala_prectica').show().prop('required', true);
+    if (selectedValue == 'No Cumple') {
+        $('#motivo_mala_prectica').show();
+
+        $.ajax({
+            url: "../php/malas_practicas.php",
+            type: "GET",
+            success: function (response) {
+                $("#motivo_mala_prectica").html(response);
+            },
+        });
     } else {
-        $('#motivo_mala_prectica').hide().prop('required', false);
+        $('#motivo_mala_prectica').hide();
+        $('#motivo_mala_prectica input[type="checkbox"]').prop('checked', false);
     }
 })
 
 $(document).on('change', '#validacion_id', function () {
     var selectedValue = $(this).val();
-    if(selectedValue == 'No Cumple') {
-        $('#motivo_validacion_id').show().prop('required', true);
+    if (selectedValue == 'No Cumple') {
+        $('#motivo_validacion_id').show();
+
+        $.ajax({
+            url: "../php/validacion_id.php",
+            type: "GET",
+            success: function (response) {
+                $("#motivo_validacion_id").html(response);
+            },
+        });
     } else {
-        $('#motivo_validacion_id').hide().prop('required', false);
+        $('#motivo_validacion_id').hide();
+        $('#motivo_validacion_id input[type="checkbox"]').prop('checked', false);
     }
 })
+
+$(document).on('submit', '#nuevo_motivo', function (e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+
+    $.ajax({
+        url: '../php/guardar_motivo.php',
+        type: "POST",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response.status === "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "",
+                    text: response.message,
+                });
+                $("#nuevo_motivo")[0].reset();
+            } else if (response.status === "error") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: response.message,
+                });
+                $("#nuevo_motivo")[0].reset();
+            }
+        }
+    })
+});
+
+$(document).on('click', '#filtro_tabla', function (e) {
+    e.preventDefault();
+
+    var tipo_motivo = $('#tipo_motivo').val();
+    var url = '../php/consulta_filtro_tabla.php?tipo_motivo=' + encodeURIComponent(tipo_motivo);
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (response) {
+            $('#table').html(response);
+        },
+        error: function (error) {
+            console.log('Error en la búsqueda:', error);
+        }
+    });
+});
+
+$(document).on('click', '.eliminar', function () {
+    var idValue = $(this).data('id');
+    var tipo_motivo = $('#tipo_motivo').val();
+    var formUrl = '../php/eliminar.php?id=' + encodeURIComponent(idValue) + '&tipo_motivo=' + encodeURIComponent(tipo_motivo);
+
+    $.ajax({
+        url: formUrl,
+        type: 'POST',
+        success: function (response) {
+            if (response.status === "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "",
+                    text: response.message,
+                });
+            } else if (response.status === "error") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: response.message,
+                });
+            }
+        }
+    });
+});

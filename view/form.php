@@ -44,21 +44,21 @@ $nombre = $_SESSION["nombre"];
         <div class="input-container">
             <label>
                 Nombre Asesor&nbsp;&nbsp;&nbsp;
-                <input type="text" id="nombre" name="nombre" class="input" readonly>
+                <input type="text" id="nombre" name="nombre" class="input" >
             </label>
         </div>
 
         <div class="input-container">
             <label>
                 Supervisor&nbsp;&nbsp;&nbsp;
-                <input type="text" id="supervisor" name="supervisor" class="input" readonly>
+                <input type="text" id="supervisor" name="supervisor" class="input">
             </label>
         </div>
 
         <div class="input-container">
             <label>
                 Sede&nbsp;&nbsp;&nbsp;
-                <input type="text" id="sede" name="sede" class="input" readonly>
+                <input type="text" id="sede" name="sede" class="input">
             </label>
         </div>
 
@@ -105,26 +105,10 @@ $nombre = $_SESSION["nombre"];
             </label>
         </div>
 
-        <div class="input-container" id="motivo_mala_prectica">
-            <label>
-                Motivo Mala Practica&nbsp;&nbsp;&nbsp;
-                <select class="input" name="motivo_mala_prectica">
-                    <option value="">Motivo</option>
-                    <option value="Suplantacion">Suplantacion</option>
-                    <option value="Oferta Errada">Oferta Errada</option>
-                    <option value="Datos Errados">Datos Errados</option>
-                    <option value="Lenguaje inapropiado">Lenguaje Inapropiado</option>
-                    <option value="Incumplimiento Ley 2300">Incumplimiento Ley 2300</option>
-                    <option value="Publicidad engañosa">Publicidad Engañosa</option>
-                    <option value="Omisión proceso legal en venta">Omisión Proceso Legal En Venta</option>
-                    <option value="Novedad correo electronido venta digital">Novedad Correo Electronido Venta Digital</option>
-                    <option value="Lenguaje inapropiado gestion comercial">Lenguaje Inapropiado Gestion Comercial</option>
-                    <option value="Cuelga Llamada">Cuelga Llamada</option>
-                    <option value="Mala tipificación">Mala Tipificación</option>
-                    <option value="Llamada muda y no la devuelve">Llamada Muda Y No La Devuelve</option>
-                </select>
-            </label>
+        <!-- CHECKBOX MALAS PRACTICAS-->
+        <div class="input-container checklist" id="motivo_mala_prectica">
         </div>
+        <input type="hidden" name="motivosSeleccionados" id="motivosSeleccionados">
 
         <div class="input-container">
             <label>
@@ -138,28 +122,17 @@ $nombre = $_SESSION["nombre"];
             </label>
         </div>
 
-        <div class="input-container" id="motivo_validacion_id">
-            <label>
-                Motivo Validacion ID&nbsp;&nbsp;&nbsp;
-                <select class="input" name="motivo_validacion_id">
-                    <option value="">Motivo</option>
-                    <option value="Sin soporte de segunda validacion ID">Sin soporte de segunda validacion ID</option>
-                    <option value="Cliente no pasa filtros de seguridad P.F">Cliente no pasa filtros de seguridad P.F</option>
-                    <option value="Cuenta hogar con antigüedad -40 dias">Cuenta hogar con antigüedad -40 dias</option>
-                    <option value="Cuenta movil envio de otp cuenta con modificaciones -40 días">Cuenta movil envio de otp cuenta con modificaciones -40 días</option>
-                    <option value="Sin Validacion De Identidad">Sin Validacion De Identidad</option>
-                    <option value="Cliente con mas de 2 reservas al mes">Cliente con mas de 2 reservas al mes</option>
-                    <option value="Cliente Fallecido">Cliente Fallecido</option>
-                    <option value="Validación de id modificada">Validación de id modificada</option>
-                </select>
-            </label>
+        <!-- CHECKBOX VALIDACION ID-->
+        <div class="input-container checklist" id="motivo_validacion_id">
         </div>
+        <input type="hidden" name="motivosSeleccionados2" id="motivosSeleccionados2">
 
         <div class="input-container">
             <label>
                 Gestion Comercial&nbsp;&nbsp;&nbsp;
                 <select class="input" name="gestion_comercial" required>
                     <option value="">Seleccionar</option>
+                    <option value="No aplica">No Aplica</option>
                     <option value="Asesor distraido">Asesor Distraido</option>
                     <option value="Falta de información">Falta De Información</option>
                     <option value="No desvia objeciones">No Desvia Objeciones</option>

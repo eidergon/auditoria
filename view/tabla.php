@@ -7,6 +7,7 @@ $result = $conn->query($sql);
 <div class="container-table">
     <div class="container-filtro">
         <input type="date" id="fecha_filtro" class="input">
+        <input type="date" id="fecha_filtro2" class="input">
         <button id="filtro" class="Btn"><ion-icon name="search-outline"></ion-icon></button>
     </div>
 
@@ -14,7 +15,6 @@ $result = $conn->query($sql);
         <table class="table" id="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Fecha Auditoria</th>
                     <th>Fecha Llamada</th>
                     <th>Tipo Auditoria</th>
@@ -37,7 +37,6 @@ $result = $conn->query($sql);
             <tbody>
                 <?php while ($row = $result->fetch_assoc()) : ?>
                     <tr scope='row'>
-                        <td><?= $audioId = $row["id"]; ?></td>
                         <td><?= $row["fecha_auditoria"]; ?></td>
                         <td><?= $row["fecha_llamada"]; ?></td>
                         <td><?= $row["tipo_auditoria"]; ?></td>

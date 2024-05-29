@@ -15,9 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hebeas_data = $_POST['hebeas_data'];
     $ley2300 = $_POST['ley2300'];
     $malas_preacticas = $_POST['malas_preacticas'];
-    $motivo_mala_prectica = !empty($_POST['motivo_mala_prectica']) ? $_POST['motivo_mala_prectica'] : null;
+    $motivo_mala_prectica = !empty($_POST['motivosSeleccionados']) ? $_POST['motivosSeleccionados'] : null;
     $validacion_id = $_POST['validacion_id'];
-    $motivo_validacion_id = !empty($_POST['motivo_validacion_id']) ? $_POST['motivo_validacion_id'] : null;
+    $motivo_validacion_id = !empty($_POST['motivosSeleccionados2']) ? $_POST['motivosSeleccionados2'] : null;
     $gestion_comercial = $_POST['gestion_comercial'];
     $nombreArchivo = isset($_FILES['archivos']['name']) && !empty($_FILES['archivos']['name']) ? $_FILES['archivos']['name'] : null;
     $tipoArchivo = isset($_FILES['archivos']['type']) && !empty($_FILES['archivos']['type']) ? $_FILES['archivos']['type'] : null;
@@ -29,10 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($stmt->execute()) {
         $response['status'] = 'success';
-        $response['message'] = 'Entrevista agendada correctamente.';
+        $response['message'] = 'Auditoria guardada correctamente.';
     } else {
         $response['status'] = 'error';
-        $response['message'] = 'Error al agendar la entrevista: ' . $conn->error;
+        $response['message'] = 'Error al guardar la auditoria: ' . $conn->error;
     }
     
     $stmt->close();

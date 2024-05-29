@@ -1,8 +1,9 @@
 <?php
 include_once 'conexion.php';
 $fecha = $_GET['fecha'];
+$fecha2 = $_GET['fecha2'];
 
-$sql = "SELECT * FROM datos_auditoria WHERE fecha_auditoria = '$fecha'";
+$sql = "SELECT * FROM datos_auditoria WHERE fecha_auditoria BETWEEN '$fecha' and '$fecha2'";
 $result = $conn->query($sql);
 ?>
 
@@ -32,7 +33,6 @@ $result = $conn->query($sql);
         <tbody>
             <?php while ($row = $result->fetch_assoc()) : ?>
                 <tr scope='row'>
-                    <td><?= $audioId = $row["id"]; ?></td>
                     <td><?= $row["fecha_auditoria"]; ?></td>
                     <td><?= $row["fecha_llamada"]; ?></td>
                     <td><?= $row["tipo_auditoria"]; ?></td>
